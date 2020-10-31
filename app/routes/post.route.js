@@ -7,6 +7,7 @@ module.exports = app => {
     router
     .post('/add', posts.create)
     .get('/findall', posts.findAll)
+    .get('/published', posts.findAllPublished)
     .get('/findone/:id', posts.findOne)
     .put('/update/:id', posts.update)
     .delete('/delete/:id', posts.delete)

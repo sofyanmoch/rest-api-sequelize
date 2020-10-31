@@ -122,6 +122,15 @@ exports.deleteAll = (req, res) => {
 }
 
 // Find All Publish = true
-exports.findAllPublish = (req, res) => {
-
+exports.findAllPublished = (req, res) => {
+    Post.findAll({
+        where: {published:true}
+    }).then((data) => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message:
+            err.message || 'Internal server error'
+        })
+    })
 }
