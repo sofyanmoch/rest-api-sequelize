@@ -29,9 +29,20 @@ exports.create = (req, res) => {
         })
 }
 
-//Retrieve All
+// Find All
 exports.findAll = (req, res) => {
+    const title = req.query.title
+    let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
+    Post.findAll({where: condition})
+        .then((data) => {
+            res.send(data)
+        }).catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || 'Internal server error'
+            })
+        });
 }
 
 // find single

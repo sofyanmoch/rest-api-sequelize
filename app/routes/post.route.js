@@ -4,7 +4,9 @@ module.exports = app => {
     let router = require('express').Router()
 
     //create new Post
-    router.post('/add', posts.create)
+    router
+    .post('/add', posts.create)
+    .get('/findall', posts.findAll)
 
     app.use('/api/posts', router)
 }
