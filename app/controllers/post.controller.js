@@ -84,7 +84,25 @@ exports.update = (req, res) => {
 
 // Delete a Post
 exports.delete = (req, res) => {
+    const id = req.params.id
 
+    Post.destroy({
+        where: { id:id }
+    }).then((result) => {
+        if(result == 1) {
+            res.send({
+                message: 'Deleted Success'
+            })
+        } else {
+            res.send({
+                message: `Cannot deleted id ${id}`
+            })
+        }
+    }).catch((err) => {
+        res.status(500).send({
+            message: 'Internal server error'
+        })
+    })
 }
 
 // Delete All Post

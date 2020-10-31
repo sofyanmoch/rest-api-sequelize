@@ -9,6 +9,7 @@ module.exports = app => {
     .get('/findall', posts.findAll)
     .get('/findone/:id', posts.findOne)
     .put('/update/:id', posts.update)
+    .delete('/delete/:id', posts.delete)
 
     app.use('/api/posts', router)
 }
