@@ -40,6 +40,10 @@ app.get('/', (req, res) => {
     })
 })
 
+// Import Post Router
+require('./app/routes/post.route')(app)
+
+// Port
 const PORT = process.env.PORT || 8080;
 
 //listen
