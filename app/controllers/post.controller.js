@@ -107,7 +107,18 @@ exports.delete = (req, res) => {
 
 // Delete All Post
 exports.deleteAll = (req, res) => {
-
+    Post.destroy({
+        where : {},
+        truncate: false
+    }).then((result) => {
+        res.send({
+            message:`${result} Posts deleted succesfully!`
+        })
+    }).catch((err) => {
+        res.status(500).send({
+            message: err.message || 'Internal server error'
+        })
+    })
 }
 
 // Find All Publish = true
