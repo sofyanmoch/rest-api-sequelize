@@ -47,7 +47,16 @@ exports.findAll = (req, res) => {
 
 // find single
 exports.findOne = (req, res) => {
+    const id = req.params.id;
 
+    Post.findByPk(id)
+        .then((data) => {
+            res.send(data)
+        }).catch((err) => {
+            res.status(500).send({
+                message: `error retrieving post with id =${id}`
+            })
+        })
 }
 
 // Update a Post

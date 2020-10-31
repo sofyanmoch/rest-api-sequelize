@@ -7,6 +7,7 @@ module.exports = app => {
     router
     .post('/add', posts.create)
     .get('/findall', posts.findAll)
+    .get('/findone/:id', posts.findOne)
 
     app.use('/api/posts', router)
 }
