@@ -61,7 +61,25 @@ exports.findOne = (req, res) => {
 
 // Update a Post
 exports.update = (req, res) => {
+    const id = req.params.id;
 
+    Post.update(req.body, {
+        where: { id:id }
+    }).then((result) => {
+        if(result == 1) {
+            res.send({
+                message: 'Update Success'
+            })
+        } else {
+            res.send({
+                message: `cannot update with id =${id}`
+            })
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: 'Internal server error'
+        })
+    })
 }
 
 // Delete a Post
