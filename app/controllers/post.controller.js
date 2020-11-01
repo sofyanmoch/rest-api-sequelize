@@ -33,8 +33,27 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     const title = req.query.title
     let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    let sort = !req.query.sort? 'id' : req.query.sort
+    let type = !req.query.type? 'ASC': req.query.type
+    let limit = !req.query.limit? 3 : parseInt(req.query.limit)
+    let page = !req.query.page? 1 : parseInt(req.query.page)
+    let offset = page === 1? 0 :(page-1) * limit 
 
-    Post.findAll({where: condition})
+
+    Post.findAll({
+        // Ordering and Grouping
+        // Sequelize provides the order and group options to work with ORDER BY and GROUP BY.
+        order: [
+            [ sort,type]
+        ],
+
+        // Limits and Pagination\
+        page,offset,limit,
+
+
+        // search
+        where: condition
+        })
         .then((data) => {
             res.send(data)
         }).catch(err => {
